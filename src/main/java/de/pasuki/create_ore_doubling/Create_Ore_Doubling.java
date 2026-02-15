@@ -23,6 +23,20 @@ public class Create_Ore_Doubling {
     public static final String MOD_ID = "create_ore_doubling";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final ResourceLocation[] RAW_ORE_RECIPES = {
+            ResourceLocation.parse("create:crushing/raw_iron"),
+            ResourceLocation.parse("create:crushing/raw_gold"),
+            ResourceLocation.parse("create:crushing/raw_copper"),
+            ResourceLocation.parse("create:crushing/raw_zinc")
+    };
+
+    private static final ResourceLocation[] RAW_ORE_BLOCK_RECIPES = {
+            ResourceLocation.parse("create:crushing/raw_iron_block"),
+            ResourceLocation.parse("create:crushing/raw_gold_block"),
+            ResourceLocation.parse("create:crushing/raw_copper_block"),
+            ResourceLocation.parse("create:crushing/raw_zinc_block")
+    };
+
     public Create_Ore_Doubling(IEventBus ignoredModEventBus, ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -32,29 +46,40 @@ public class Create_Ore_Doubling {
     public void onServerStarting(ServerStartingEvent event) {
         RecipeManager recipeManager = event.getServer().getRecipeManager();
 
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_iron"), false);
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_gold"), false);
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_copper"), false);
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_zinc"), false);
+        int updatedEntries = 0;
+        int updatedRecipes = 0;
 
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_iron_block"), true);
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_gold_block"), true);
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_copper_block"), true);
-        applyConfiguredChances(recipeManager, ResourceLocation.parse("create:crushing/raw_zinc_block"), true);
+        for (ResourceLocation recipeId : RAW_ORE_RECIPES) {
+            int changed = applyConfiguredChances(recipeManager, recipeId, false);
+            if (changed >= 0) {
+                updatedRecipes++;
+                updatedEntries += changed;
+            }
+        }
+
+        for (ResourceLocation recipeId : RAW_ORE_BLOCK_RECIPES) {
+            int changed = applyConfiguredChances(recipeManager, recipeId, true);
+            if (changed >= 0) {
+                updatedRecipes++;
+                updatedEntries += changed;
+            }
+        }
+
+        LOGGER.info("Config chance patch finished: {} recipes updated, {} outputs changed", updatedRecipes, updatedEntries);
     }
 
-    private static void applyConfiguredChances(RecipeManager recipeManager, ResourceLocation recipeId, boolean isBlockRecipe) {
+    private static int applyConfiguredChances(RecipeManager recipeManager, ResourceLocation recipeId, boolean isBlockRecipe) {
         RecipeHolder<?> holder = recipeManager.byKey(recipeId).orElse(null);
         if (holder == null) {
-            LOGGER.warn("Recipe {} not found; skipping chance update", recipeId);
-            return;
+            LOGGER.warn("[{}] Recipe not found; skipping chance update", recipeId);
+            return -1;
         }
 
         Object recipe = holder.value();
         List<?> outputs = extractOutputs(recipe);
         if (outputs == null) {
-            LOGGER.warn("Could not access outputs for recipe {}; skipping", recipeId);
-            return;
+            LOGGER.warn("[{}] Could not access recipe outputs; this may indicate a Create API/internal format change", recipeId);
+            return -1;
         }
 
         String oreName = extractOreName(recipeId);
@@ -63,28 +88,33 @@ public class Create_Ore_Doubling {
 
         int updated = 0;
         for (Object output : outputs) {
-            Float chance = readChance(output);
-            ItemStack stack = readStack(output);
+            Float chance = readChance(output, recipeId);
+            ItemStack stack = readStack(output, recipeId);
             if (chance == null || stack == null || stack.isEmpty()) {
                 continue;
             }
 
             ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (itemId == null) {
+                continue;
+            }
+
             if ("create".equals(itemId.getNamespace()) && "experience_nugget".equals(itemId.getPath())) {
-                if (setChance(output, experienceChance)) {
+                if (setChance(output, experienceChance, recipeId)) {
                     updated++;
                 }
                 continue;
             }
 
             if (itemId.getPath().startsWith("crushed_raw_") && chance < 1.0F) {
-                if (setChance(output, extraDropChance)) {
+                if (setChance(output, extraDropChance, recipeId)) {
                     updated++;
                 }
             }
         }
 
-        LOGGER.info("Applied configured chance values to {} output entries in recipe {}", updated, recipeId);
+        LOGGER.info("[{}] Applied configured chances to {} output entries", recipeId, updated);
+        return updated;
     }
 
     private static float resolveExtraDropChance(String oreName, boolean isBlockRecipe) {
@@ -134,31 +164,32 @@ public class Create_Ore_Doubling {
             } catch (NoSuchFieldException ignored) {
                 type = type.getSuperclass();
             } catch (IllegalAccessException ex) {
-                LOGGER.warn("Failed to access recipe results", ex);
                 return null;
             }
         }
         return null;
     }
 
-    private static ItemStack readStack(Object processingOutput) {
+    private static ItemStack readStack(Object processingOutput, ResourceLocation recipeId) {
         try {
             return (ItemStack) processingOutput.getClass().getMethod("getStack").invoke(processingOutput);
         } catch (Exception ex) {
+            LOGGER.debug("[{}] Could not read processing output stack", recipeId, ex);
             return null;
         }
     }
 
-    private static Float readChance(Object processingOutput) {
+    private static Float readChance(Object processingOutput, ResourceLocation recipeId) {
         try {
             Object value = processingOutput.getClass().getMethod("getChance").invoke(processingOutput);
             return value instanceof Number n ? n.floatValue() : null;
         } catch (Exception ex) {
+            LOGGER.debug("[{}] Could not read processing output chance", recipeId, ex);
             return null;
         }
     }
 
-    private static boolean setChance(Object processingOutput, float newChance) {
+    private static boolean setChance(Object processingOutput, float newChance, ResourceLocation recipeId) {
         Class<?> type = processingOutput.getClass();
         while (type != null) {
             try {
@@ -169,7 +200,7 @@ public class Create_Ore_Doubling {
             } catch (NoSuchFieldException ignored) {
                 type = type.getSuperclass();
             } catch (Exception ex) {
-                LOGGER.warn("Failed to set processing output chance", ex);
+                LOGGER.warn("[{}] Failed to set processing output chance", recipeId, ex);
                 return false;
             }
         }
