@@ -8,6 +8,7 @@ It adds and balances crushing recipes so raw ores and raw ore blocks produce ext
 - Crushing recipes for raw **iron**, **gold**, **copper**, and **zinc**.
 - Crushing recipes for corresponding **raw ore blocks**.
 - Extra outputs are chance-based to preserve Create-style progression and automation balancing.
+- Includes polished in-game config localization for **English** and **German**.
 
 ## Compatibility
 

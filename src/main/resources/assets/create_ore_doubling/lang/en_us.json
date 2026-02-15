@@ -1,19 +1,19 @@
 {
-  "create_ore_doubling.configuration.title": "Create Ore Doubling Config",
+  "create_ore_doubling.configuration.title": "Create Ore Doubling Settings",
   "create_ore_doubling.configuration.section.create_ore_doubling.common.toml": "Create Ore Doubling",
-  "create_ore_doubling.configuration.section.create_ore_doubling.common.toml.title": "General",
+  "create_ore_doubling.configuration.section.create_ore_doubling.common.toml.title": "Recipe Chances",
 
   "create_ore_doubling.configuration.rawOreCrushing": "Raw Ore Crushing",
-  "create_ore_doubling.configuration.rawOreCrushing.ironExtraDropChance": "Iron Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreCrushing.goldExtraDropChance": "Gold Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreCrushing.copperExtraDropChance": "Copper Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreCrushing.zincExtraDropChance": "Zinc Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreCrushing.experienceChance": "Experience Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreCrushing.ironExtraDropChance": "Iron: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreCrushing.goldExtraDropChance": "Gold: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreCrushing.copperExtraDropChance": "Copper: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreCrushing.zincExtraDropChance": "Zinc: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreCrushing.experienceChance": "Experience Nugget Chance (0.0-1.0)",
 
   "create_ore_doubling.configuration.rawOreBlockCrushing": "Raw Ore Block Crushing",
-  "create_ore_doubling.configuration.rawOreBlockCrushing.ironExtraDropChance": "Iron Block Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreBlockCrushing.goldExtraDropChance": "Gold Block Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreBlockCrushing.copperExtraDropChance": "Copper Block Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreBlockCrushing.zincExtraDropChance": "Zinc Block Extra Drop Chance (0.0-1.0)",
-  "create_ore_doubling.configuration.rawOreBlockCrushing.experienceChance": "Block Experience Chance (0.0-1.0)"
+  "create_ore_doubling.configuration.rawOreBlockCrushing.ironExtraDropChance": "Iron Block: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.goldExtraDropChance": "Gold Block: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.copperExtraDropChance": "Copper Block: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.zincExtraDropChance": "Zinc Block: Extra Crushed Ore Chance (0.0-1.0)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.experienceChance": "Experience Nugget Chance (0.0-1.0)"
 }
