@@ -23,7 +23,7 @@ public class Create_Ore_Doubling {
     public static final String MOD_ID = "create_ore_doubling";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public Create_Ore_Doubling(IEventBus modEventBus, ModContainer modContainer) {
+    public Create_Ore_Doubling(IEventBus ignoredModEventBus, ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -57,10 +57,10 @@ public class Create_Ore_Doubling {
             return;
         }
 
-        float extraDropChance = (float) (isBlockRecipe
-                ? Config.RAW_ORE_BLOCK_EXTRA_DROP_CHANCE.get()
-                : Config.RAW_ORE_EXTRA_DROP_CHANCE.get());
-        float experienceChance = (float) Config.EXPERIENCE_NUGGET_CHANCE.get();
+        float extraDropChance = isBlockRecipe
+                ? Config.RAW_ORE_BLOCK_EXTRA_DROP_CHANCE.get().floatValue()
+                : Config.RAW_ORE_EXTRA_DROP_CHANCE.get().floatValue();
+        float experienceChance = Config.EXPERIENCE_NUGGET_CHANCE.get().floatValue();
 
         int updated = 0;
         for (Object output : outputs) {
@@ -71,9 +71,6 @@ public class Create_Ore_Doubling {
             }
 
             ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            if (itemId == null) {
-                continue;
-            }
 
             if ("create".equals(itemId.getNamespace()) && "experience_nugget".equals(itemId.getPath())) {
                 if (setChance(output, experienceChance)) {
@@ -92,7 +89,6 @@ public class Create_Ore_Doubling {
         LOGGER.info("Applied configured chance values to {} output entries in recipe {}", updated, recipeId);
     }
 
-    @SuppressWarnings("unchecked")
     private static List<?> extractOutputs(Object recipe) {
         Class<?> type = recipe.getClass();
         while (type != null) {
