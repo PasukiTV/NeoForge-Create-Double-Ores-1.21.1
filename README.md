@@ -20,7 +20,11 @@ It adds and balances crushing recipes so raw ores and raw ore blocks produce ext
 
 The mod exposes drop chances in the common config file:
 
-- `rawOreExtraDropChance`
+- `rawOreExtraDropChance.global`
+- `rawOreExtraDropChance.ironMultiplier`
+- `rawOreExtraDropChance.goldMultiplier`
+- `rawOreExtraDropChance.copperMultiplier`
+- `rawOreExtraDropChance.zincMultiplier`
 - `rawOreBlockExtraDropChance`
 - `experienceNuggetChance`
 
@@ -29,6 +33,10 @@ Config path (server/client):
 - `config/create_ore_doubling-common.toml`
 
 Values are expected between `0.0` and `1.0` (`0.5 = 50%`, `0.75 = 75%`).
+Raw ore final chance formula:
+
+- `finalRawOreChance = min(1.0, rawOreExtraDropChance.global * <ore>Multiplier)`
+
 
 ## Development
 

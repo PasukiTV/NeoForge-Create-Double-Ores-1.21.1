@@ -57,9 +57,7 @@ public class Create_Ore_Doubling {
             return;
         }
 
-        float extraDropChance = isBlockRecipe
-                ? Config.RAW_ORE_BLOCK_EXTRA_DROP_CHANCE.get().floatValue()
-                : Config.RAW_ORE_EXTRA_DROP_CHANCE.get().floatValue();
+        float extraDropChance = resolveExtraDropChance(recipeId, isBlockRecipe);
         float experienceChance = Config.EXPERIENCE_NUGGET_CHANCE.get().floatValue();
 
         int updated = 0;
@@ -87,6 +85,35 @@ public class Create_Ore_Doubling {
         }
 
         LOGGER.info("Applied configured chance values to {} output entries in recipe {}", updated, recipeId);
+    }
+
+
+    private static float resolveExtraDropChance(ResourceLocation recipeId, boolean isBlockRecipe) {
+        if (isBlockRecipe) {
+            return Config.RAW_ORE_BLOCK_EXTRA_DROP_CHANCE.get().floatValue();
+        }
+
+        float globalChance = Config.RAW_ORE_EXTRA_DROP_CHANCE_GLOBAL.get().floatValue();
+        float multiplier = switch (extractOreName(recipeId)) {
+            case "iron" -> Config.RAW_ORE_EXTRA_DROP_CHANCE_IRON_MULTIPLIER.get().floatValue();
+            case "gold" -> Config.RAW_ORE_EXTRA_DROP_CHANCE_GOLD_MULTIPLIER.get().floatValue();
+            case "copper" -> Config.RAW_ORE_EXTRA_DROP_CHANCE_COPPER_MULTIPLIER.get().floatValue();
+            case "zinc" -> Config.RAW_ORE_EXTRA_DROP_CHANCE_ZINC_MULTIPLIER.get().floatValue();
+            default -> 1.0F;
+        };
+
+        return Math.min(1.0F, globalChance * multiplier);
+    }
+
+    private static String extractOreName(ResourceLocation recipeId) {
+        String path = recipeId.getPath();
+        String prefix = "crushing/raw_";
+        if (!path.startsWith(prefix)) {
+            return "";
+        }
+
+        String oreName = path.substring(prefix.length());
+        return oreName.endsWith("_block") ? oreName.substring(0, oreName.length() - 6) : oreName;
     }
 
     private static List<?> extractOutputs(Object recipe) {
