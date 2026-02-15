@@ -12,22 +12,27 @@ public class Config {
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_CRUSHING_IRON_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw iron crushing.")
+            .translation("create_ore_doubling.configuration.rawOreCrushing.ironExtraDropChance")
             .defineInRange("ironExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_CRUSHING_GOLD_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw gold crushing.")
+            .translation("create_ore_doubling.configuration.rawOreCrushing.goldExtraDropChance")
             .defineInRange("goldExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_CRUSHING_COPPER_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw copper crushing.")
+            .translation("create_ore_doubling.configuration.rawOreCrushing.copperExtraDropChance")
             .defineInRange("copperExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_CRUSHING_ZINC_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw zinc crushing.")
+            .translation("create_ore_doubling.configuration.rawOreCrushing.zincExtraDropChance")
             .defineInRange("zincExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_CRUSHING_EXPERIENCE_CHANCE = BUILDER
             .comment("Experience nugget chance for raw ore crushing.")
+            .translation("create_ore_doubling.configuration.rawOreCrushing.experienceChance")
             .defineInRange("experienceChance", 0.75D, 0.0D, 1.0D);
 
     static {
@@ -38,22 +43,27 @@ public class Config {
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_BLOCK_CRUSHING_IRON_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw iron block crushing.")
+            .translation("create_ore_doubling.configuration.rawOreBlockCrushing.ironExtraDropChance")
             .defineInRange("ironExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_BLOCK_CRUSHING_GOLD_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw gold block crushing.")
+            .translation("create_ore_doubling.configuration.rawOreBlockCrushing.goldExtraDropChance")
             .defineInRange("goldExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_BLOCK_CRUSHING_COPPER_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw copper block crushing.")
+            .translation("create_ore_doubling.configuration.rawOreBlockCrushing.copperExtraDropChance")
             .defineInRange("copperExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_BLOCK_CRUSHING_ZINC_EXTRA_DROP_CHANCE = BUILDER
             .comment("Extra crushed ore chance for raw zinc block crushing.")
+            .translation("create_ore_doubling.configuration.rawOreBlockCrushing.zincExtraDropChance")
             .defineInRange("zincExtraDropChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec.DoubleValue RAW_ORE_BLOCK_CRUSHING_EXPERIENCE_CHANCE = BUILDER
             .comment("Experience nugget chance for raw ore block crushing.")
+            .translation("create_ore_doubling.configuration.rawOreBlockCrushing.experienceChance")
             .defineInRange("experienceChance", 0.75D, 0.0D, 1.0D);
 
     static {
