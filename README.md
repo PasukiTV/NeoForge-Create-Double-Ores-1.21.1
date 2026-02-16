@@ -1,25 +1,59 @@
+# Create Ore Doubling (NeoForge 1.21.1)
 
-Installation information
-=======
+Create Ore Doubling is a lightweight addon for the [Create](https://www.curseforge.com/minecraft/mc-mods/create) mod.
+It adds and balances crushing recipes so raw ores and raw ore blocks produce extra crushed ore outputs.
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+## Features
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+- Crushing recipes for raw **iron**, **gold**, **copper**, and **zinc**.
+- Crushing recipes for corresponding **raw ore blocks**.
+- Extra outputs are chance-based to preserve Create-style progression and automation balancing.
+- Includes polished in-game config localization for **English** and **German**.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+## Compatibility
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+- Minecraft **1.21.1**
+- NeoForge **21.1.x**
+- Create **6.0.6+** (within the configured range)
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+
+## Configuration
+
+The config is organized by recipe groups:
+
+- `rawOreCrushing.*`
+  - `ironExtraDropChance`
+  - `goldExtraDropChance`
+  - `copperExtraDropChance`
+  - `zincExtraDropChance`
+  - `experienceChance`
+- `rawOreBlockCrushing.*`
+  - `ironExtraDropChance`
+  - `goldExtraDropChance`
+  - `copperExtraDropChance`
+  - `zincExtraDropChance`
+  - `experienceChance`
+
+Config path (server/client):
+
+- `config/create_ore_doubling-common.toml`
+
+All values use `0.0` to `1.0` (`0.5 = 50%`, `0.75 = 75%`).
+
+## Development
+
+### Run client
+
+```bash
+./gradlew runClient
+```
+
+### Build
+
+```bash
+./gradlew build
+```
+
+## Notes
+
+This project started from the NeoForge MDK template and was adapted into a Create addon focused on ore processing.

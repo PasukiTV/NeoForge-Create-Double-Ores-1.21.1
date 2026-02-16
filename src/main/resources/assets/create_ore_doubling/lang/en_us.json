@@ -1,13 +1,17 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item",
-
-  "examplemod.configuration.title": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
-  "examplemod.configuration.items": "Item List",
-  "examplemod.configuration.logDirtBlock": "Log Dirt Block",
-  "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "examplemod.configuration.magicNumber": "Magic Number"
+  "create_ore_doubling.configuration.title": "Create Ore Doubling Settings",
+  "create_ore_doubling.configuration.section.create_ore_doubling.common.toml": "Create Ore Doubling",
+  "create_ore_doubling.configuration.section.create_ore_doubling.common.toml.title": "Recipe Chances",
+  "create_ore_doubling.configuration.rawOreCrushing": "Raw Ore Crushing",
+  "create_ore_doubling.configuration.rawOreCrushing.ironExtraDropChance": "Iron: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreCrushing.goldExtraDropChance": "Gold: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreCrushing.copperExtraDropChance": "Copper: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreCrushing.zincExtraDropChance": "Zinc: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreCrushing.experienceChance": "Experience Nugget Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing": "Raw Ore Block Crushing",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.ironExtraDropChance": "Iron Block: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.goldExtraDropChance": "Gold Block: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.copperExtraDropChance": "Copper Block: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.zincExtraDropChance": "Zinc Block: Extra Crushed Ore Chance (0.0-1.0 | 0.5=50%, 0.75=75%)",
+  "create_ore_doubling.configuration.rawOreBlockCrushing.experienceChance": "Experience Nugget Chance (0.0-1.0 | 0.5=50%, 0.75=75%)"
 }
